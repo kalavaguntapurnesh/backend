@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://localhost:5173",
   "https://frontend-iota-lovat-88.vercel.app",
 ];
 const cors = require("cors");
