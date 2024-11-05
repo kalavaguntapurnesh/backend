@@ -48,7 +48,7 @@ router.get("/me", (req, res) => {
     if (err)
       return res.status(500).json({ message: "Failed to authenticate token" });
 
-    const user = await User.findById(decoded.id).select("email");
+    const user = await User.findById(decoded.id).select("fullName");
     res.json(user);
   });
 });
