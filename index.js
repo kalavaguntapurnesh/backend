@@ -4,16 +4,22 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
-const allowedOrigins = [
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "https://frontend-iota-lovat-88.vercel.app",
-  "https://property-management-two-inky.vercel.app/",
-];
+// const allowedOrigins = [
+//   "http://localhost:3000",
+//   "http://localhost:5173",
+//   "https://frontend-iota-lovat-88.vercel.app",
+//   "https://property-management-two-inky.vercel.app/",
+// ];
 const cors = require("cors");
+app.use(
+  cors({
+    origin: "*", // Allows all origins
+    credentials: true, // Use this if your endpoints handle cookies/auth
+  })
+);
 
 const app = express();
-app.use(cors()); // Allow all origins
+// app.use(cors()); // Allow all origins
 
 // Alternatively, restrict to specific origin
 // app.use(cors({ origin: "http://localhost:3000" }));
