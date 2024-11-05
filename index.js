@@ -1,15 +1,31 @@
 // api/index.js
+
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://frontend-iota-lovat-88.vercel.app",
+];
 const cors = require("cors");
 
 const app = express();
 app.use(cors()); // Allow all origins
 
 // Alternatively, restrict to specific origin
-app.use(cors({ origin: "http://localhost:3000" }));
+// app.use(cors({ origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 app.use(express.json());
 
 // Connect to MongoDB
