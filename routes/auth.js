@@ -9,13 +9,13 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // Register route
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role, fullName } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: "User already exists" });
 
-    const newUser = new User({ email, password });
+    const newUser = new User({ email, password, role, fullName });
     await newUser.save();
 
     const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
